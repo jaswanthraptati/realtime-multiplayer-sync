@@ -1,9 +1,12 @@
 const { WebSocketServer } = require("ws");
 const crypto = require("crypto");
 
-const PORT = 8080;
+const PORT = Number(process.env.PORT) || 8080;
 
-const wss = new WebSocketServer({ port: PORT });
+const wss = new WebSocketServer({
+  port: PORT,
+  host: "0.0.0.0",
+});
 
 const users = new Map();
 
@@ -242,5 +245,5 @@ ws.on("close", () => {
 });
 
 console.log(
-  `FlamSync WebSocket server running on ws://localhost:${PORT}`
+  `FlamSync WebSocket server running on 0.0.0.0:${PORT}`
 );
